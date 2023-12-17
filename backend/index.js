@@ -4,6 +4,7 @@ import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
 import { PORT, HOST, DB_COLLECTIONS } from './server-settings.js';
 import * as db from './src/js/db-rest-methods.js';
+import { ObjectId } from 'mongodb';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const SRC_DIR = join(__dirname, 'src');
@@ -17,35 +18,96 @@ app.use(cors())
 app.use('/server-settings.js', express.static(join(__dirname, 'server-settings.js')));
 app.use(express.static(join(SRC_DIR, 'js')));
 
-for (const collection of DB_COLLECTIONS) {
-  app.get(`/${collection}`, async (req, res)=>{
-    const query = req.query;
-    const new_query = {
-      id: query.id
-    };
-    const data = await db.get(query.database, query.collection, new_query)
-    if (!data) {
-      res.sendStatus(400);
-    }
-    else {
-      res.json(data);
-    }
-  });
 
-  app.post(`/${collection}`, async (req, res)=>{
-    const query = req.query;
-    const new_query = {
-      id: query.id
-    };
-    const data = await db.post(query.database, query.collection, new_query)
-    if (!data) {
-      res.sendStatus(400);
-    }
-    else {
-      res.json(data);
-    }
-  });
-}
+app.get('/experiments', async (req, res)=>{
+  const query = req.query;
+  const data = await db.experiments_get()
+  if (!data) {
+    res.sendStatus(400);
+  }
+  else {
+    res.json(data);
+  }
+});
+
+app.get('/experiment', async (req, res)=>{
+  const query = req.query;
+  const new_query = {
+    _id: new ObjectId(query.id)
+  };
+  const data = await db.experiment_get(new_query)
+  if (!data) {
+    res.sendStatus(400);
+  }
+  else {
+    res.json(data);
+  }
+});
+
+app.post('/experiment', async (req, res)=>{
+  await db.experiment_post(res.body);
+  res.sendStatus(204);
+});
+
+app.get('/drones-info', async (req, res)=>{
+  const query = req.query;
+  const data = await db.drones_info_get()
+  if (!data) {
+    res.sendStatus(400);
+  }
+  else {
+    res.json(data);
+  }
+});
+
+app.get('/drone-info', async (req, res)=>{
+  const query = req.query;
+  const new_query = {
+    _id: new ObjectId(query.id)
+  };
+  const data = await db.drone_info_get(new_query)
+  if (!data) {
+    res.sendStatus(400);
+  }
+  else {
+    res.json(data);
+  }
+});
+
+app.post('/drone-info', async (req, res)=>{
+  await db.drone_info_post(res.body);
+  res.sendStatus(204);
+});
+
+app.get('/drones-note', async (req, res)=>{
+  const query = req.query;
+  const data = await db.drones_note_get()
+  if (!data) {
+    res.sendStatus(400);
+  }
+  else {
+    res.json(data);
+  }
+});
+
+app.get('/drone-note', async (req, res)=>{
+  const query = req.query;
+  const new_query = {
+    _id: new ObjectId(query.id)
+  };
+  const data = await db.drone_note_get(new_query)
+  if (!data) {
+    res.sendStatus(400);
+  }
+  else {
+    res.json(data);
+  }
+});
+
+app.post('/drone-note', async (req, res)=>{
+  await db.drone_note_post(res.body);
+  res.sendStatus(204);
+});
   
 app.get('*', (req, res) => {
   res.sendStatus(404);
