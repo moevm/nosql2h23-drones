@@ -1,19 +1,47 @@
-import express from 'express'
-import { dirname, join } from 'path'
+import express from 'express';
+import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
+import { PORT, HOST } from './server-settings.js';
+import * as db from './src/js/db-rest-methods.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const SRC_DIR = join(__dirname, 'src')
+const SRC_DIR = join(__dirname, 'src');
+const HTML_DIR = join(SRC_DIR, 'html');
 
-const PORT = 3000
-const app = express()
+db.open_connection();
 
-app.use(express.static(SRC_DIR))
+const app = express();
 
-app.get('/', (req, res) => {
-  res.sendFile('html/example.html', {root: SRC_DIR})
+app.use('/server-settings.js', express.static(join(__dirname, 'server-settings.js')));
+app.use(express.static(join(SRC_DIR, 'js')));
+
+app.get('/collection/', async (req, res)=>{
+  const query = req.query;
+  const new_query = {
+    id: query.id
+  }
+  const data = await db.get(query.database, query.collection, new_query)
+  if (!data) {
+    res.sendStatus(400)
+  }
+  else {
+    res.json(data)
+  }
+});
+
+app.get('*', (req, res) => {
+  res.sendStatus(404);
+});
+
+process.on('exit', ()=>{
+  db.close_connection();
+  console.log('App terminated!');
 })
 
-app.listen(PORT, () =>
-  console.log(`App listening on port ${PORT}!`)
-)
+process.on('SIGINT', ()=>{
+  process.exit();
+})
+
+app.listen(PORT, HOST, () => {
+  console.log(`App listening on port ${PORT}!`);
+})
