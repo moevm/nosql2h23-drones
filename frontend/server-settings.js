@@ -8,3 +8,5 @@ export const URL_MAP = new Map([
   ['experiment', `${PROTOCOL}://${URL}/experiment`],
   ['drone-notes', `${PROTOCOL}://${URL}/drone-notes`]  
 ]);
+
+export const BACKEND_URL = 'http://127.0.0.1:3000'

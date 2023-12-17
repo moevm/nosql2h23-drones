@@ -1,5 +1,19 @@
 import * as table from './table.js';
-import { URL_MAP } from '../../server-settings.js';
+import { URL_MAP, BACKEND_URL } from '../../server-settings.js';
+
+async function fetchExperiments() {
+	fetch(`${BACKEND_URL}/Experiments?database=nosql2h23-drones&collection=Experiments`, res=>{
+		if (res.ok) {
+			const json = res.json();
+		} else {
+			alert(`Ошибка запроса: ${res.status}`);
+		}
+	});
+}
+
+fetchExperiments().then(data => {
+	data;
+})
 
 table.add_row(
 	'table',
