@@ -1,4 +1,4 @@
-import { MongoClient } from 'mongodb';
+import { MongoClient, ObjectId } from 'mongodb';
 import { MONGODB_URI, DB_COLLECTIONS, DB_NAME } from '../../server-settings.js';
 
 var client = null;
@@ -32,7 +32,16 @@ export async function experiment_get(query) {
     const data = await collection.find(query).toArray((err, result)=>{
         if (err) throw err;
     })
-    return data;
+    let drones = [];
+    for ( const info of data )
+    {
+        for ( const droneId of info.dronesInfo )
+        {
+            const newData = await drone_info_get( { _id: new ObjectId( droneId ) } );
+            drones = drones.concat( newData );
+        }
+    }
+    return drones;
 }
 
 export async function experiment_post(data) {
