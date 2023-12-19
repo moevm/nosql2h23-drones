@@ -26,20 +26,19 @@ export async function experiments_get() {
 
 export async function experiment_get(query) {
     if (!query)
-        return {}
+        return []
     const database = client.db(DB_NAME);
     const collection = database.collection('Experiments');
-    const data = await collection.find(query).toArray((err, result)=>{
-        if (err) throw err;
-    })
-    let drones = [];
-    for ( const info of data )
+    const data = await collection.findOne(query)
+    if (!data)
     {
-        for ( const droneId of info.dronesInfo )
-        {
-            const newData = await drone_info_get( { _id: new ObjectId( droneId ) } );
-            drones = drones.concat( newData );
-        }
+        return []
+    }
+    let drones = [];
+    for ( const droneId of data.dronesInfo )
+    {
+        const newData = await drone_info_get( { _id: new ObjectId( droneId ) } );
+        drones = drones.concat( newData );
     }
     return drones;
 }

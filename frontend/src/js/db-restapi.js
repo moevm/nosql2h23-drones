@@ -20,8 +20,9 @@ export async function experiment_get(id) {
 	}
 }
 
-export async function experiment_post(id, data) {
-	const res = await fetch(`${BACKEND_URL}/experiment?id=${id}`, {
+export async function experiment_post(data) {
+	console.log(data)
+	const res = await fetch(`${BACKEND_URL}/experiment`, {
 	    method: 'POST',
 	    headers: {
 	      'Accept': 'application/json',
