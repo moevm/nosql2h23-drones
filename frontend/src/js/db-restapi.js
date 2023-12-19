@@ -11,7 +11,7 @@ export async function experiments_get() {
 }
 
 export async function experiment_get(id) {
-	const res = await fetch(`${BACKEND_URL}/experiment?id=${id}`);
+	const res = await fetch(`${BACKEND_URL}/experiment?id=${String(id)}`);
 	if (res.ok) {
 		return await res.json();
 	} else {
