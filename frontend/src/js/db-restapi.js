@@ -1,24 +1,26 @@
-async function experiments_get() {
-	fetch(`${BACKEND_URL}/experiments`, res=>{
-		if (res.ok) {
-			const json = await res.json();
-		} else {
-			alert(`Ошибка запроса: ${res.status}`);
-		}
-	});
+import { BACKEND_URL } from '../../server-settings.js';
+
+export async function experiments_get() {
+	const res = await fetch(`${BACKEND_URL}/experiments`);
+	if (res.ok) {
+		return await res.json();
+	} else {
+		alert(`Ошибка запроса: ${res.status}`);
+		return [];
+	}
 }
 
-async function experiment_get(id) {
-	fetch(`${BACKEND_URL}/experiment?id=${id}`, res=>{
-		if (res.ok) {
-			const json = await res.json();
-		} else {
-			alert(`Ошибка запроса: ${res.status}`);
-		}
-	});
+export async function experiment_get(id) {
+	const res = await fetch(`${BACKEND_URL}/experiment?id=${id}`);
+	if (res.ok) {
+		return await res.json();
+	} else {
+		alert(`Ошибка запроса: ${res.status}`);
+		return [];
+	}
 }
 
-async function experiment_post(id, data) {
+export async function experiment_post(id, data) {
 	const res = await fetch(`${BACKEND_URL}/experiment?id=${id}`, {
 	    method: 'POST',
 	    headers: {
@@ -29,27 +31,27 @@ async function experiment_post(id, data) {
 	});
 }
 
-async function drones_info_get() {
-	fetch(`${BACKEND_URL}/drones-info`, res=>{
-		if (res.ok) {
-			const json = await res.json();
-		} else {
-			alert(`Ошибка запроса: ${res.status}`);
-		}
-	});
+export async function drones_info_get() {
+	const res = await fetch(`${BACKEND_URL}/drones-info`);
+	if (res.ok) {
+		return await res.json();
+	} else {
+		alert(`Ошибка запроса: ${res.status}`);
+		return [];
+	}
 }
 
-async function drone_info_get(id) {
-	fetch(`${BACKEND_URL}/drone-info?id=${id}`, res=>{
-		if (res.ok) {
-			const json = await res.json();
-		} else {
-			alert(`Ошибка запроса: ${res.status}`);
-		}
-	});
+export async function drone_info_get(id) {
+	const res = await fetch(`${BACKEND_URL}/drone-info?id=${id}`);
+	if (res.ok) {
+		return await res.json();
+	} else {
+		alert(`Ошибка запроса: ${res.status}`);
+		return [];
+	}
 }
 
-async function drone_info_post(id, data) {
+export async function drone_info_post(id, data) {
 	const res = await fetch(`${BACKEND_URL}/drone-info?id=${id}`, {
 	    method: 'POST',
 	    headers: {
@@ -60,27 +62,27 @@ async function drone_info_post(id, data) {
 	});
 }
 
-async function drones_note_get() {
-	fetch(`${BACKEND_URL}/drones-note`, res=>{
-		if (res.ok) {
-			const json = await res.json();
-		} else {
-			alert(`Ошибка запроса: ${res.status}`);
-		}
-	});
+export async function drones_note_get() {
+	const res = await fetch(`${BACKEND_URL}/drones-note`);
+	if (res.ok) {
+		return await res.json();
+	} else {
+		alert(`Ошибка запроса: ${res.status}`);
+		return [];
+	}
 }
 
-async function drone_note_get(id) {
-	fetch(`${BACKEND_URL}/drone-note?id=${id}`, res=>{
-		if (res.ok) {
-			const json = await res.json();
-		} else {
-			alert(`Ошибка запроса: ${res.status}`);
-		}
-	});
+export async function drone_note_get(id) {
+	const res = await fetch(`${BACKEND_URL}/drone-note?id=${id}`);
+	if (res.ok) {
+		return await res.json();
+	} else {
+		alert(`Ошибка запроса: ${res.status}`);
+		return {};
+	}
 }
 
-async function drone_note_post(id, data) {
+export async function drone_note_post(id, data) {
 	const res = await fetch(`${BACKEND_URL}/drone-note?id=${id}`, {
 	    method: 'POST',
 	    headers: {

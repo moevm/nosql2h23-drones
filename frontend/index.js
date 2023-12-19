@@ -21,6 +21,10 @@ for (const addr of URL_MAP.keys()) {
   });
 }
 
+app.get('/', (req, res) => {
+  res.redirect('/experiments');
+});
+
 app.get('*', (req, res) => {
   res.sendStatus(404);
 });
