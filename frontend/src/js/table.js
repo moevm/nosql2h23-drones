@@ -8,6 +8,7 @@ export function add_row(id, row, onClickURL) {
 		newCell.appendChild(newText);
 	}
 
+	console.log(onClickURL)
 	if (onClickURL) {
 		newRow.onclick = () => {
 			window.location.href = onClickURL

@@ -1,13 +1,22 @@
 import * as table from './table.js';
-import { URL_MAP, BACKEND_URL } from '../../server-settings.js';
+import { URL_MAP } from '../../server-settings.js';
+import { experiments_get } from './db-restapi.js';
 
-fetchExperiments().then(data => {
-	data;
-})
-
-table.add_row(
-	'table',
-	['Полет роя дронов №1','2023-10-07T10:1542.956087Z','2023-10-08T10:1542.956087Z', 'EYE', '56', '1d 02h 03m 45s'],
-	URL_MAP.get('experiment')
-);
-// table_delete_row('table', 1)
+window.onload = () => experiments_get().then(data => {
+	console.log( data );
+	for ( const row of data )
+	{
+		table.add_row(
+			'table',
+			[
+				row.name,
+				row.creationDate,
+				row.changedDate,
+				'EYE',
+				row.dronesInfo?.length || 0,
+				String(row.timeAmount) + ' s'
+			],
+			URL_MAP.get('experiment') + `?id=${row._id}`
+		);
+	}
+});
