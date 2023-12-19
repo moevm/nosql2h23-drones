@@ -8,7 +8,6 @@ async function fetchExperiment() {
 }
 
 window.onload = () => fetchExperiment().then(data => {
-	console.log( data );
 	let i = 0;
 	for ( const row of data )
 	{

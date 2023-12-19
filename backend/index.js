@@ -15,6 +15,7 @@ db.open_connection();
 const app = express();
 
 app.use(cors())
+app.use(express.json())
 app.use('/server-settings.js', express.static(join(__dirname, 'server-settings.js')));
 app.use(express.static(join(SRC_DIR, 'js')));
 
@@ -45,7 +46,7 @@ app.get('/experiment', async (req, res)=>{
 });
 
 app.post('/experiment', async (req, res)=>{
-  await db.experiment_post(res.body);
+  await db.experiment_post(req.body);
   res.sendStatus(204);
 });
 
@@ -75,7 +76,7 @@ app.get('/drone-info', async (req, res)=>{
 });
 
 app.post('/drone-info', async (req, res)=>{
-  await db.drone_info_post(res.body);
+  await db.drone_info_post(req.body);
   res.sendStatus(204);
 });
 
@@ -105,7 +106,7 @@ app.get('/drone-note', async (req, res)=>{
 });
 
 app.post('/drone-note', async (req, res)=>{
-  await db.drone_note_post(res.body);
+  await db.drone_note_post(req.body);
   res.sendStatus(204);
 });
   
