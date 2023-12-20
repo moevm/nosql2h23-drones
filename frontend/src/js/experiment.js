@@ -7,7 +7,8 @@ async function fetchExperimentDrones() {
 	return await experiment_get_drones(id);
 }
 
-window.onload = () => {
+function dronesGet() {
+	document.getElementById("table").getElementsByTagName('tbody')[0].innerHTML = '';
 	fetchExperimentDrones().then(data => {
 		let i = 0;
 		for ( const row of data )
@@ -22,6 +23,10 @@ window.onload = () => {
 			);
 		}
 	});
+}
+
+window.onload = () => {
+	dronesGet()
 
 	document.getElementById('back').onclick = () => {
 		window.location.href = URL_MAP.get('experiments');
@@ -41,6 +46,8 @@ window.onload = () => {
 				'name': form_data.get('name')
 			}
 		}
-		drone_info_post(data)
+		drone_info_post(data).then(no_data => {
+			dronesGet()
+		})
 	}
 }
