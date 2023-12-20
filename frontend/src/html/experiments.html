@@ -4,21 +4,33 @@
         <link rel="stylesheet" href="experiments.css">
     </head>
     <body class="color">
-    	<div class="container">
-        <table id="table">
-            <thead>
-                <tr>
-                    <th>Эксперимент</th>
-                    <th>Дата создания</th>
-                    <th>Дата изменения</th>
-                    <th>Просмотр</th>
-                    <th>Количество дронов</th>
-                    <th>Длительность эксперимента</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table> 
-       </div>
+        <div class="container">
+            <p id="add">ADD</p>
+            <dialog id="dialog_add">
+                <p>Create experiment</p>
+                <form id='dialog_add_form_data'>
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name"><br><br>
+                </form>
+                <form method="dialog">
+                    <button id="dialog_add_ok">OK</button>
+                    <button>CLOSE</button>
+                </form>
+            </dialog>
+            <table id="table">
+                <thead>
+                    <tr>
+                        <th>Эксперимент</th>
+                        <th>Дата создания</th>
+                        <th>Дата изменения</th>
+                        <th>Просмотр</th>
+                        <th>Количество дронов</th>
+                        <th>Длительность эксперимента</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
         <script type="module" src="experiments.js"></script>
     </body>
 </html>

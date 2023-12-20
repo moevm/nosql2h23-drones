@@ -4,7 +4,51 @@
         <link rel="stylesheet" href="drone-notes.css">
     </head>
     <body class="container">
-        <a href="/experiment"><img class="image" src="/img/Back.png" /></a>
+        <a id="back"><img class="image" src="/img/Back.png" /></a>
+        <p id="add">ADD</p>
+        <dialog id="dialog_add">
+            <p>Create DroneNote</p>
+            <form id='dialog_add_form_data'>
+                <label for="time">Time</label>
+                <input type="text" id="time" name="time"><br><br>
+                <label for="pos_x">pos_x</label>
+                <input type="number" id="pos_x" name="pos_x"><br><br>
+                <label for="pos_y">pos_y</label>
+                <input type="number" id="pos_y" name="pos_y"><br><br>
+                <label for="pos_z">pos_z</label>
+                <input type="number" id="pos_z" name="pos_z"><br><br>
+                <label for="vel_x">vel_x</label>
+                <input type="number" id="vel_x" name="vel_x"><br><br>
+                <label for="vel_y">vel_y</label>
+                <input type="number" id="vel_y" name="vel_y"><br><br>
+                <label for="vel_z">vel_z</label>
+                <input type="number" id="vel_z" name="vel_z"><br><br>
+                <label for="roll">roll</label>
+                <input type="number" id="roll" name="roll"><br><br>
+                <label for="pitch">pitch</label>
+                <input type="number" id="pitch" name="pitch"><br><br>
+                <label for="yawl">yawl</label>
+                <input type="number" id="yawl" name="yawl"><br><br>
+                <label for="ang_vel_x">ang_vel_x</label>
+                <input type="number" id="ang_vel_x" name="ang_vel_x"><br><br>
+                <label for="ang_vel_y">ang_vel_y</label>
+                <input type="number" id="ang_vel_y" name="ang_vel_y"><br><br>
+                <label for="ang_vel_z">ang_vel_z</label>
+                <input type="number" id="ang_vel_z" name="ang_vel_z"><br><br>
+                <label for="rpm0">rpm0</label>
+                <input type="number" id="rpm0" name="rpm0"><br><br>
+                <label for="rpm1">rpm1</label>
+                <input type="number" id="rpm1" name="rpm1"><br><br>
+                <label for="rpm2">rpm2</label>
+                <input type="number" id="rpm2" name="rpm2"><br><br>
+                <label for="rpm3">rpm3</label>
+                <input type="number" id="rpm3" name="rpm3"><br><br>
+            </form>
+            <form method="dialog">
+                <button id="dialog_add_ok">OK</button>
+                <button>CLOSE</button>
+            </form>
+        </dialog>
         <table id="table">
             <thead>
                 <tr>

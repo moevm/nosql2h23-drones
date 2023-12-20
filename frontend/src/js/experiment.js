@@ -1,31 +1,46 @@
 import * as table from './table.js';
 import { URL_MAP } from '../../server-settings.js';
-import { experiment_get } from './db-restapi.js';
+import { experiment_get_drones, drone_info_post } from './db-restapi.js';
 
-async function fetchExperiment() {
+async function fetchExperimentDrones() {
 	const id = new URLSearchParams(window.location.search).get('id');
-	return await experiment_get(id);
+	return await experiment_get_drones(id);
 }
 
-window.onload = () => fetchExperiment().then(data => {
-	let i = 0;
-	for ( const row of data )
-	{
-		table.add_row(
-			'table',
-			[
-				String(++i),
-				row.name
-			],
-			URL_MAP.get('drone-notes') + `?id=${row._id}`
-		);
+window.onload = () => {
+	fetchExperimentDrones().then(data => {
+		let i = 0;
+		for ( const row of data )
+		{
+			table.add_row(
+				'table',
+				[
+					String(++i),
+					row.name
+				],
+				URL_MAP.get('drone-notes') + `?experiment_id=${new URLSearchParams(window.location.search).get('id')}&drone_info_id=${row._id}`
+			);
+		}
+	});
+
+	document.getElementById('back').onclick = () => {
+		window.location.href = URL_MAP.get('experiments');
 	}
-});
 
-// table.add_row('table', ['1', 'Mavic Pro'], URL_MAP.get('drone-notes') + `?id=1`);
-// table.add_row('table', ['2', 'DJI Mavic Air'], URL_MAP.get('drone-notes') + `?id=2`);
-// table.add_row('table', ['3', 'DJI Air 2S'], URL_MAP.get('drone-notes') + `?id=3`);
+	const dialog_add = document.getElementById("dialog_add");
+	document.getElementById('add').onclick = () => {
+		dialog_add.showModal();
+	}
 
-document.getElementById('back').onclick = () => {
-	window.location.href = URL_MAP.get('experiments');
+	const dialog_add_ok = document.getElementById("dialog_add_ok");
+	dialog_add_ok.onclick = () => {
+		const form_data = new FormData(document.getElementById('dialog_add_form_data'))
+		const data = {
+			'id': new URLSearchParams(window.location.search).get('id'),
+			'value': {
+				'name': form_data.get('name')
+			}
+		}
+		drone_info_post(data)
+	}
 }
