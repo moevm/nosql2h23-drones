@@ -50,6 +50,20 @@ app.post('/experiment', async (req, res)=>{
   res.sendStatus(204);
 });
 
+app.get('/experiment/drones', async (req, res)=>{
+  const query = req.query;
+  const new_query = {
+    _id: query.id
+  };
+  const data = await db.experiment_get_drones(new_query);
+  if (!data) {
+    res.sendStatus(400);
+  }
+  else {
+    res.json(data);
+  }
+});
+
 app.get('/drones-info', async (req, res)=>{
   const query = req.query;
   const data = await db.drones_info_get()
@@ -78,6 +92,20 @@ app.get('/drone-info', async (req, res)=>{
 app.post('/drone-info', async (req, res)=>{
   await db.drone_info_post(req.body);
   res.sendStatus(204);
+});
+
+app.get('/drone-info/notes', async (req, res)=>{
+  const query = req.query;
+  const new_query = {
+    _id: query.id
+  };
+  const data = await db.drone_info_get_notes(new_query);
+  if (!data) {
+    res.sendStatus(400);
+  }
+  else {
+    res.json(data);
+  }
 });
 
 app.get('/drones-note', async (req, res)=>{

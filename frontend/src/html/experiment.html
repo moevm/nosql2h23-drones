@@ -4,7 +4,19 @@
         <link rel="stylesheet" href="experiment.css">
     </head>
     <body class="container">
-        <a href="/experiments"><img class="image" src="/img/Back.png" /></a>
+        <a id="back"><img class="image" src="/img/Back.png" /></a>
+        <p id="add">ADD</p>
+        <dialog id="dialog_add">
+            <p>Create DroneInfo</p>
+            <form id='dialog_add_form_data'>
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name"><br><br>
+            </form>
+            <form method="dialog">
+                <button id="dialog_add_ok">OK</button>
+                <button>CLOSE</button>
+            </form>
+        </dialog>
         <table id="table">
             <thead>
                 <tr>
