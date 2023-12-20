@@ -1,3 +1,26 @@
-.red {
-	color: red;
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    background-color: #2c3e50; /* Цвет фона контейнера */
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Тень контейнера */
 }
+
+.color { background-color: #1b2024;
+}
+
+td, th{
+text-align: center;
+border: 1px solid black; 
+
+}
+th{
+background-color: #777777;
+}
+td{
+background-color: #D9D9D9;
+}
+#1b2024
+#2c3e50
+#d4e3f5
+D9D9D9
