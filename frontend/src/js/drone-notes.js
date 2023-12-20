@@ -7,7 +7,8 @@ async function fetchDroneInfo() {
 	return await drone_info_get_notes(id);
 }
 
-window.onload = () => {
+function notesGet() {
+	document.getElementById("table").getElementsByTagName('tbody')[0].innerHTML = '';
 	fetchDroneInfo().then(data => {
 		let i = 0;
 		for ( const row of data )
@@ -36,6 +37,10 @@ window.onload = () => {
 			);
 		}
 	});
+}
+
+window.onload = () => {
+	notesGet()
 
 	document.getElementById('back').onclick = () => {
 		window.location.href = URL_MAP.get('experiment') + `?id=${new URLSearchParams(window.location.search).get('experiment_id')}`;
@@ -72,6 +77,8 @@ window.onload = () => {
 				'rpm3': form_data.get('rpm3'),
 			}
 		}
-		drone_note_post(data)
+		drone_note_post(data).then(no_data => {
+			notesGet()
+		})
 	}
 }

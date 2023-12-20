@@ -2,7 +2,8 @@ import * as table from './table.js';
 import { URL_MAP } from '../../server-settings.js';
 import { experiments_get, experiment_post } from './db-restapi.js';
 
-window.onload = () => {
+function experimentsGet() {
+	document.getElementById("table").getElementsByTagName('tbody')[0].innerHTML = '';	
 	experiments_get().then(data => {
 		for ( const row of data ) {
 			table.add_row(
@@ -19,6 +20,10 @@ window.onload = () => {
 			);
 		}
 	})
+}
+
+window.onload = () => {
+	experimentsGet()
 
 	const dialog_add = document.getElementById("dialog_add");
 	document.getElementById('add').onclick = () => {
@@ -31,6 +36,8 @@ window.onload = () => {
 		const data = {
 			'name': form_data.get('name')
 		}
-		experiment_post(data)
+		experiment_post(data).then(no_data => {
+			experimentsGet()
+		})
 	}
 };
