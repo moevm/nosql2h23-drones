@@ -77,8 +77,12 @@ export async function drone_info_post(data) {
 	});
 }
 
-export async function drone_info_get_notes(id) {
-	const res = await fetch(`${BACKEND_URL}/drone-info/notes?id=${String(id)}`);
+export async function drone_info_get_notes(id, sortBy, sortOrder) {
+	let url = `${BACKEND_URL}/drone-info/notes?id=${String(id)}`
+	if(sortBy && sortOrder){
+		url += `&sortBy=${String(sortBy)}&sortOrder=${String(sortOrder)}`
+	}
+	const res = await fetch(url);
 	if (res.ok) {
 		return res.json();
 	} else {
