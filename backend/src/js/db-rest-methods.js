@@ -201,22 +201,22 @@ export async function drone_note_post(data) {
         const data_add = {
             droneID: new ObjectId(data.id),
             time: new Date(data.value.time),
-            pos_x: data.value.pos_x,
-            pos_y: data.value.pos_y,
-            pos_z: data.value.pos_z,
-            vel_x: data.value.vel_x,
-            vel_y: data.value.vel_y,
-            vel_z: data.value.vel_z,
-            roll: data.value.roll,
-            pitch: data.value.pitch,
-            yawl: data.value.yawl,
-            ang_vel_x: data.value.ang_vel_x,
-            ang_vel_y: data.value.ang_vel_y,
-            ang_vel_z: data.value.ang_vel_z,
-            rpm0: data.value.rpm0,
-            rpm1: data.value.rpm1,
-            rpm2: data.value.rpm2,
-            rpm3: data.value.rpm3
+            pos_x: parseFloat(data.value.pos_x),
+            pos_y: parseFloat(data.value.pos_y),
+            pos_z: parseFloat(data.value.pos_z),
+            vel_x: parseFloat(data.value.vel_x),
+            vel_y: parseFloat(data.value.vel_y),
+            vel_z: parseFloat(data.value.vel_z),
+            roll: parseFloat(data.value.roll),
+            pitch: parseFloat(data.value.pitch),
+            yawl: parseFloat(data.value.yawl),
+            ang_vel_x: parseFloat(data.value.ang_vel_x),
+            ang_vel_y: parseFloat(data.value.ang_vel_y),
+            ang_vel_z: parseFloat(data.value.ang_vel_z),
+            rpm0: parseInt(data.value.rpm0, 10),
+            rpm1: parseInt(data.value.rpm1, 10),
+            rpm2: parseInt(data.value.rpm2, 10),
+            rpm3: parseInt(data.value.rpm3, 10)
         }
         const id = await collection.insertOne(data_add);
         collection = database.collection('DronesInfo');
