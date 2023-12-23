@@ -55,221 +55,221 @@ window.onload = () => {
 
 	document.getElementById('sort_up_time').onclick = () => {
 		const url = new URL(window.location.href)
-		url.searchParams.set('sortBy', 'experiment')
+		url.searchParams.set('sortBy', 'time')
 		url.searchParams.set('sortOrder', 'asc')
 		window.location.href = String(url)
 	}
 	document.getElementById('sort_down_time').onclick = () => {
 		const url = new URL(window.location.href)
-		url.searchParams.set('sortBy', 'name')
+		url.searchParams.set('sortBy', 'time')
 		url.searchParams.set('sortOrder', 'desc')
 		window.location.href = String(url)
 	}
 
 	document.getElementById('sort_up_pos_x').onclick = () => {
 		const url = new URL(window.location.href)
-		url.searchParams.set('sortBy', 'experiment')
+		url.searchParams.set('sortBy', 'pos_x')
 		url.searchParams.set('sortOrder', 'asc')
 		window.location.href = String(url)
 	}
 	document.getElementById('sort_down_pos_x').onclick = () => {
 		const url = new URL(window.location.href)
-		url.searchParams.set('sortBy', 'name')
+		url.searchParams.set('sortBy', 'pos_x')
 		url.searchParams.set('sortOrder', 'desc')
 		window.location.href = String(url)
 	}
 
 	document.getElementById('sort_up_pos_y').onclick = () => {
 		const url = new URL(window.location.href)
-		url.searchParams.set('sortBy', 'experiment')
+		url.searchParams.set('sortBy', 'pos_y')
 		url.searchParams.set('sortOrder', 'asc')
 		window.location.href = String(url)
 	}
 	document.getElementById('sort_down_pos_y').onclick = () => {
 		const url = new URL(window.location.href)
-		url.searchParams.set('sortBy', 'name')
+		url.searchParams.set('sortBy', 'pos_y')
 		url.searchParams.set('sortOrder', 'desc')
 		window.location.href = String(url)
 	}
 
 	document.getElementById('sort_up_pos_z').onclick = () => {
 		const url = new URL(window.location.href)
-		url.searchParams.set('sortBy', 'experiment')
+		url.searchParams.set('sortBy', 'pos_z')
 		url.searchParams.set('sortOrder', 'asc')
 		window.location.href = String(url)
 	}
 	document.getElementById('sort_down_pos_z').onclick = () => {
 		const url = new URL(window.location.href)
-		url.searchParams.set('sortBy', 'name')
+		url.searchParams.set('sortBy', 'pos_z')
 		url.searchParams.set('sortOrder', 'desc')
 		window.location.href = String(url)
 	}
 
 	document.getElementById('sort_up_vel_x').onclick = () => {
 		const url = new URL(window.location.href)
-		url.searchParams.set('sortBy', 'experiment')
+		url.searchParams.set('sortBy', 'vel_x')
 		url.searchParams.set('sortOrder', 'asc')
 		window.location.href = String(url)
 	}
 	document.getElementById('sort_down_vel_x').onclick = () => {
 		const url = new URL(window.location.href)
-		url.searchParams.set('sortBy', 'name')
+		url.searchParams.set('sortBy', 'vel_x')
 		url.searchParams.set('sortOrder', 'desc')
 		window.location.href = String(url)
 	}
 
 	document.getElementById('sort_up_vel_y').onclick = () => {
 		const url = new URL(window.location.href)
-		url.searchParams.set('sortBy', 'experiment')
+		url.searchParams.set('sortBy', 'vel_y')
 		url.searchParams.set('sortOrder', 'asc')
 		window.location.href = String(url)
 	}
 	document.getElementById('sort_down_vel_y').onclick = () => {
 		const url = new URL(window.location.href)
-		url.searchParams.set('sortBy', 'name')
+		url.searchParams.set('sortBy', 'vel_y')
 		url.searchParams.set('sortOrder', 'desc')
 		window.location.href = String(url)
 	}
 
 	document.getElementById('sort_up_vel_z').onclick = () => {
 		const url = new URL(window.location.href)
-		url.searchParams.set('sortBy', 'experiment')
+		url.searchParams.set('sortBy', 'vel_z')
 		url.searchParams.set('sortOrder', 'asc')
 		window.location.href = String(url)
 	}
 	document.getElementById('sort_down_vel_z').onclick = () => {
 		const url = new URL(window.location.href)
-		url.searchParams.set('sortBy', 'name')
+		url.searchParams.set('sortBy', 'vel_z')
 		url.searchParams.set('sortOrder', 'desc')
 		window.location.href = String(url)
 	}
 
 	document.getElementById('sort_up_roll').onclick = () => {
 		const url = new URL(window.location.href)
-		url.searchParams.set('sortBy', 'experiment')
+		url.searchParams.set('sortBy', 'roll')
 		url.searchParams.set('sortOrder', 'asc')
 		window.location.href = String(url)
 	}
 	document.getElementById('sort_down_roll').onclick = () => {
 		const url = new URL(window.location.href)
-		url.searchParams.set('sortBy', 'name')
+		url.searchParams.set('sortBy', 'roll')
 		url.searchParams.set('sortOrder', 'desc')
 		window.location.href = String(url)
 	}
 
 	document.getElementById('sort_up_pitch').onclick = () => {
 		const url = new URL(window.location.href)
-		url.searchParams.set('sortBy', 'experiment')
+		url.searchParams.set('sortBy', 'pitch')
 		url.searchParams.set('sortOrder', 'asc')
 		window.location.href = String(url)
 	}
 	document.getElementById('sort_down_pitch').onclick = () => {
 		const url = new URL(window.location.href)
-		url.searchParams.set('sortBy', 'name')
+		url.searchParams.set('sortBy', 'pitch')
 		url.searchParams.set('sortOrder', 'desc')
 		window.location.href = String(url)
 	}
 
 	document.getElementById('sort_up_yaw').onclick = () => {
 		const url = new URL(window.location.href)
-		url.searchParams.set('sortBy', 'experiment')
+		url.searchParams.set('sortBy', 'yawl')
 		url.searchParams.set('sortOrder', 'asc')
 		window.location.href = String(url)
 	}
 	document.getElementById('sort_down_yaw').onclick = () => {
 		const url = new URL(window.location.href)
-		url.searchParams.set('sortBy', 'name')
+		url.searchParams.set('sortBy', 'yawl')
 		url.searchParams.set('sortOrder', 'desc')
 		window.location.href = String(url)
 	}
 
 	document.getElementById('sort_up_ang_x').onclick = () => {
 		const url = new URL(window.location.href)
-		url.searchParams.set('sortBy', 'experiment')
+		url.searchParams.set('sortBy', 'ang_vel_x')
 		url.searchParams.set('sortOrder', 'asc')
 		window.location.href = String(url)
 	}
 	document.getElementById('sort_down_ang_x').onclick = () => {
 		const url = new URL(window.location.href)
-		url.searchParams.set('sortBy', 'name')
+		url.searchParams.set('sortBy', 'ang_vel_x')
 		url.searchParams.set('sortOrder', 'desc')
 		window.location.href = String(url)
 	}
 
 	document.getElementById('sort_up_ang_y').onclick = () => {
 		const url = new URL(window.location.href)
-		url.searchParams.set('sortBy', 'experiment')
+		url.searchParams.set('sortBy', 'ang_vel_y')
 		url.searchParams.set('sortOrder', 'asc')
 		window.location.href = String(url)
 	}
 	document.getElementById('sort_down_ang_y').onclick = () => {
 		const url = new URL(window.location.href)
-		url.searchParams.set('sortBy', 'name')
+		url.searchParams.set('sortBy', 'ang_vel_y')
 		url.searchParams.set('sortOrder', 'desc')
 		window.location.href = String(url)
 	}
 
 	document.getElementById('sort_up_ang_z').onclick = () => {
 		const url = new URL(window.location.href)
-		url.searchParams.set('sortBy', 'experiment')
+		url.searchParams.set('sortBy', 'ang_vel_z')
 		url.searchParams.set('sortOrder', 'asc')
 		window.location.href = String(url)
 	}
 	document.getElementById('sort_down_ang_z').onclick = () => {
 		const url = new URL(window.location.href)
-		url.searchParams.set('sortBy', 'name')
+		url.searchParams.set('sortBy', 'ang_vel_z')
 		url.searchParams.set('sortOrder', 'desc')
 		window.location.href = String(url)
 	}
 
 	document.getElementById('sort_up_rpm0').onclick = () => {
 		const url = new URL(window.location.href)
-		url.searchParams.set('sortBy', 'experiment')
+		url.searchParams.set('sortBy', 'rpm0')
 		url.searchParams.set('sortOrder', 'asc')
 		window.location.href = String(url)
 	}
 	document.getElementById('sort_down_rpm0').onclick = () => {
 		const url = new URL(window.location.href)
-		url.searchParams.set('sortBy', 'name')
+		url.searchParams.set('sortBy', 'rpm0')
 		url.searchParams.set('sortOrder', 'desc')
 		window.location.href = String(url)
 	}
 
 	document.getElementById('sort_up_rpm1').onclick = () => {
 		const url = new URL(window.location.href)
-		url.searchParams.set('sortBy', 'experiment')
+		url.searchParams.set('sortBy', 'rpm1')
 		url.searchParams.set('sortOrder', 'asc')
 		window.location.href = String(url)
 	}
 	document.getElementById('sort_down_rpm1').onclick = () => {
 		const url = new URL(window.location.href)
-		url.searchParams.set('sortBy', 'name')
+		url.searchParams.set('sortBy', 'rpm1')
 		url.searchParams.set('sortOrder', 'desc')
 		window.location.href = String(url)
 	}
 
 	document.getElementById('sort_up_rpm2').onclick = () => {
 		const url = new URL(window.location.href)
-		url.searchParams.set('sortBy', 'experiment')
+		url.searchParams.set('sortBy', 'rpm2')
 		url.searchParams.set('sortOrder', 'asc')
 		window.location.href = String(url)
 	}
 	document.getElementById('sort_down_rpm2').onclick = () => {
 		const url = new URL(window.location.href)
-		url.searchParams.set('sortBy', 'name')
+		url.searchParams.set('sortBy', 'rpm2')
 		url.searchParams.set('sortOrder', 'desc')
 		window.location.href = String(url)
 	}
 
 	document.getElementById('sort_up_rpm3').onclick = () => {
 		const url = new URL(window.location.href)
-		url.searchParams.set('sortBy', 'experiment')
+		url.searchParams.set('sortBy', 'rpm3')
 		url.searchParams.set('sortOrder', 'asc')
 		window.location.href = String(url)
 	}
 	document.getElementById('sort_down_rpm3').onclick = () => {
 		const url = new URL(window.location.href)
-		url.searchParams.set('sortBy', 'name')
+		url.searchParams.set('sortBy', 'rpm3')
 		url.searchParams.set('sortOrder', 'desc')
 		window.location.href = String(url)
 	}
