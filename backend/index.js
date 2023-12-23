@@ -41,6 +41,18 @@ app.get('/experiment', async (req, res)=>{
     res.sendStatus(400);
   }
   else {
+    if(query.sortBy && query.sortOrder){
+      const order = query.sortOrder == 'asc' ? 1 : -1
+      data.sort((a, b) => {
+        if (a[query.sortBy] > b[query.sortBy]){
+          return order
+        } 
+        else if (a[query.sortBy] < b[query.sortBy]){
+          return -order
+        }
+        return 0
+      })
+    }
     res.json(data);
   }
 });

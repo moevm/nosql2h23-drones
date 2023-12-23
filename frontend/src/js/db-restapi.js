@@ -1,7 +1,11 @@
 import { BACKEND_URL } from '../../server-settings.js';
 
-export async function experiments_get() {
-	const res = await fetch(`${BACKEND_URL}/experiments`);
+export async function experiments_get(sortBy, sortOrder) {
+	let url = `${BACKEND_URL}/experiments`
+	if(sortBy && sortOrder){
+		url += `&sortBy=${String(sortBy)}&sortOrder=${String(sortOrder)}`
+	}
+	const res = await fetch(url);
 	if (res.ok) {
 		return res.json();
 	} else {

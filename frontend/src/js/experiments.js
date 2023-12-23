@@ -30,6 +30,71 @@ window.onload = () => {
 		dialog_add.showModal();
 	}
 
+	document.getElementById('sort_up_name').onclick = () => {
+		const url = new URL(window.location.href)
+		url.searchParams.set('sortBy', 'experiment')
+		url.searchParams.set('sortOrder', 'asc')
+		window.location.href = String(url)
+	}
+	document.getElementById('sort_down_name').onclick = () => {
+		const url = new URL(window.location.href)
+		url.searchParams.set('sortBy', 'name')
+		url.searchParams.set('sortOrder', 'desc')
+		window.location.href = String(url)
+	}
+
+	document.getElementById('sort_up_start').onclick = () => {
+		const url = new URL(window.location.href)
+		url.searchParams.set('sortBy', 'name')
+		url.searchParams.set('sortOrder', 'asc')
+		window.location.href = String(url)
+	}
+	document.getElementById('sort_down_start').onclick = () => {
+		const url = new URL(window.location.href)
+		url.searchParams.set('sortBy', 'name')
+		url.searchParams.set('sortOrder', 'desc')
+		window.location.href = String(url)
+	}
+
+	document.getElementById('sort_up_change').onclick = () => {
+		const url = new URL(window.location.href)
+		url.searchParams.set('sortBy', 'name')
+		url.searchParams.set('sortOrder', 'asc')
+		window.location.href = String(url)
+	}
+	document.getElementById('sort_down_change').onclick = () => {
+		const url = new URL(window.location.href)
+		url.searchParams.set('sortBy', 'name')
+		url.searchParams.set('sortOrder', 'desc')
+		window.location.href = String(url)
+	}
+
+    document.getElementById('sort_up_number').onclick = () => {
+		const url = new URL(window.location.href)
+		url.searchParams.set('sortBy', 'name')
+		url.searchParams.set('sortOrder', 'asc')
+		window.location.href = String(url)
+	}
+	document.getElementById('sort_down_number').onclick = () => {
+		const url = new URL(window.location.href)
+		url.searchParams.set('sortBy', 'name')
+		url.searchParams.set('sortOrder', 'desc')
+		window.location.href = String(url)
+	}
+
+    document.getElementById('sort_up_duration').onclick = () => {
+		const url = new URL(window.location.href)
+		url.searchParams.set('sortBy', 'name')
+		url.searchParams.set('sortOrder', 'asc')
+		window.location.href = String(url)
+	}
+	document.getElementById('sort_down_duration').onclick = () => {
+		const url = new URL(window.location.href)
+		url.searchParams.set('sortBy', 'name')
+		url.searchParams.set('sortOrder', 'desc')
+		window.location.href = String(url)
+	}
+
 	const dialog_add_ok = document.getElementById("dialog_add_ok");
 	dialog_add_ok.onclick = () => {
 		const form_data = new FormData(document.getElementById('dialog_add_form_data'))
