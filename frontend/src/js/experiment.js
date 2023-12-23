@@ -4,7 +4,9 @@ import { experiment_get_drones, drone_info_post } from './db-restapi.js';
 
 async function fetchExperimentDrones() {
 	const id = new URLSearchParams(window.location.search).get('id');
-	return await experiment_get_drones(id);
+	const sortBy = new URLSearchParams(window.location.search).get('sortBy');
+	const sortOrder = new URLSearchParams(window.location.search).get('sortOrder');
+	return await experiment_get_drones(id, sortBy, sortOrder);
 }
 
 function dronesGet() {
@@ -30,6 +32,18 @@ window.onload = () => {
 
 	document.getElementById('back').onclick = () => {
 		window.location.href = URL_MAP.get('experiments');
+	}
+	document.getElementById('sort_up').onclick = () => {
+		const url = new URL(window.location.href)
+		url.searchParams.set('sortBy', 'name')
+		url.searchParams.set('sortOrder', 'asc')
+		window.location.href = String(url)
+	}
+	document.getElementById('sort_down').onclick = () => {
+		const url = new URL(window.location.href)
+		url.searchParams.set('sortBy', 'name')
+		url.searchParams.set('sortOrder', 'desc')
+		window.location.href = String(url)
 	}
 
 	const dialog_add = document.getElementById("dialog_add");
