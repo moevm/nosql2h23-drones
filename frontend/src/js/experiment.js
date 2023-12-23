@@ -4,7 +4,9 @@ import { experiment_get_drones, drone_info_post } from './db-restapi.js';
 
 async function fetchExperimentDrones() {
 	const id = new URLSearchParams(window.location.search).get('id');
-	return await experiment_get_drones(id);
+	const sortBy = new URLSearchParams(window.location.search).get('sortBy');
+	const sortOrder = new URLSearchParams(window.location.search).get('sortOrder');
+	return await experiment_get_drones(id, sortBy, sortOrder);
 }
 
 function dronesGet() {
@@ -25,20 +27,6 @@ function dronesGet() {
 	});
 }
 
-async function sortData(key){
-	//Сортируем по возрастанию
-	if (key == 'ascending'){
-		let sortedRows = Array.from(table.rows).slice(1).sort((rowA, rowB) => rowA.cells[1].innerHTML > rowB.cells[1].innerHTML ? 1 : -1);
-    	table.tBodies[0].append(...sortedRows);
-	}
-
-	//Сортируем по убыванию
-	else{
-		let sortedRows = Array.from(table.rows).slice(1).sort((rowA, rowB) => rowA.cells[1].innerHTML < rowB.cells[1].innerHTML ? 1 : -1);
-    	table.tBodies[0].append(...sortedRows);
-	}
-}
-
 window.onload = () => {
 	dronesGet()
 
@@ -46,11 +34,16 @@ window.onload = () => {
 		window.location.href = URL_MAP.get('experiments');
 	}
 	document.getElementById('sort_up').onclick = () => {
-		console.log('enter')
-		sortData('ascending');
+		const url = new URL(window.location.href)
+		url.searchParams.set('sortBy', 'name')
+		url.searchParams.set('sortOrder', 'asc')
+		window.location.href = String(url)
 	}
 	document.getElementById('sort_down').onclick = () => {
-		sortData('descending');
+		const url = new URL(window.location.href)
+		url.searchParams.set('sortBy', 'name')
+		url.searchParams.set('sortOrder', 'desc')
+		window.location.href = String(url)
 	}
 
 	const dialog_add = document.getElementById("dialog_add");

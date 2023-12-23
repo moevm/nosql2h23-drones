@@ -32,8 +32,12 @@ export async function experiment_post(data) {
 	});
 }
 
-export async function experiment_get_drones(id) {
-	const res = await fetch(`${BACKEND_URL}/experiment/drones?id=${String(id)}`);
+export async function experiment_get_drones(id, sortBy, sortOrder) {
+	let url = `${BACKEND_URL}/experiment/drones?id=${String(id)}`
+	if(sortBy && sortOrder){
+		url += `&sortBy=${String(sortBy)}&sortOrder=${String(sortOrder)}`
+	}
+	const res = await fetch(url);
 	if (res.ok) {
 		return res.json();
 	} else {
