@@ -5,7 +5,15 @@
     </head>
     <body class="color">
         <div class="container">
+        <div class="tools">
             <a id="add"><img class="image" src="/img/Add.png" /></a>
+            <form method="GET">
+                <input name="search" type="text"
+                value=
+                "experiment=experiment_name, date_creation=2023-12-24, view=eye, drones_amount=1, duration=2">
+                <button type="submit">Искать</button>
+            </form>
+        </div>
             <dialog id="dialog_add">
                 <p>Create experiment</p>
                 <form id='dialog_add_form_data'>

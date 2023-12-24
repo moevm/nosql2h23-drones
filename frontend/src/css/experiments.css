@@ -9,6 +9,20 @@
 .color { background-color: #1b2024;
 }
 
+.tools{
+	display: flex;
+	justify-content: space-between;
+}
+
+form {
+    margin-right: 10px;
+}
+
+form input{
+	overflow-x: auto;
+}
+
+
 td, th{
 text-align: center;
 border: 1px solid black;
