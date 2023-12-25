@@ -5,6 +5,9 @@ import { fileURLToPath } from 'url';
 import { PORT, HOST, DB_COLLECTIONS } from './server-settings.js';
 import * as db from './src/js/db-rest-methods.js';
 import { ObjectId } from 'mongodb';
+import multer from 'multer';
+import { readFileSync } from 'fs';
+const upload = multer({dest: '/tmp/'})
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const SRC_DIR = join(__dirname, 'src');
@@ -215,6 +218,31 @@ app.get('/drone-note', async (req, res)=>{
 app.post('/drone-note', async (req, res)=>{
   await db.drone_note_post(req.body);
   res.sendStatus(204);
+});
+
+app.post('/massive-import', upload.single('data'), async (req, res)=>{
+  try {
+    const data = JSON.parse(readFileSync(req.file.path).toString());
+    if (db.import_data(data)) {
+      res.sendStatus(204);
+    }
+    else {
+      res.sendStatus(400);
+    }
+  }
+  catch (e) {
+    res.sendStatus(500);
+  }
+});
+
+app.get('/massive-export', async (req, res)=>{
+  const data = await db.export_data()
+  if (!data) {
+    res.sendStatus(400)
+  }
+  else {
+    res.json(data)
+  }
 });
   
 app.get('*', (req, res) => {
