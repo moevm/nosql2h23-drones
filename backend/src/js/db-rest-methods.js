@@ -15,11 +15,11 @@ export function close_connection() {
     console.log('DB connection closed!');
 }
 
-export async function experiments_get() {
+export async function experiments_get(query) {
     try {
         const database = client.db(DB_NAME);
         const collection = database.collection('Experiments');
-        const data = await collection.find({}).toArray()
+        const data = await collection.find(query).toArray()
         if (!data) {
             return []
         }

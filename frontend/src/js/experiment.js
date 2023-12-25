@@ -64,4 +64,19 @@ window.onload = () => {
 			dronesGet()
 		})
 	}
+
+	const button = document.getElementById('find');
+    button.addEventListener('click', function(event) {
+    	event.preventDefault();
+    	let text = document.getElementById("search").value;
+    	let keyValuePairs = text.split(', ');
+		let resultObject = {};
+		keyValuePairs.forEach(function(keyValue) {
+    	let pair = keyValue.split('=');
+    	let key = pair[0];
+    	let value = pair[1];
+    	resultObject[key] = value;
+		});
+		console.log(resultObject);
+    });
 }

@@ -1,9 +1,13 @@
 import { BACKEND_URL } from '../../server-settings.js';
 
-export async function experiments_get(sortBy, sortOrder) {
-	let url = `${BACKEND_URL}/experiments`
-	if(sortBy && sortOrder){
-		url += `&sortBy=${String(sortBy)}&sortOrder=${String(sortOrder)}`
+export async function experiments_get(query) {
+	let url = `${BACKEND_URL}/experiments`;
+	if (query != null){
+		url += "?"
+	for (const [key, value] of query) {
+		if (key != undefined && value != undefined)
+		url +=  key + `=` + value + `&`;
+	}
 	}
 	const res = await fetch(url);
 	if (res.ok) {

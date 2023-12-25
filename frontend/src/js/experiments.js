@@ -3,8 +3,9 @@ import { URL_MAP } from '../../server-settings.js';
 import { experiments_get, experiment_post } from './db-restapi.js';
 
 function experimentsGet() {
-	document.getElementById("table").getElementsByTagName('tbody')[0].innerHTML = '';	
-	experiments_get().then(data => {
+	const searchParams = new URLSearchParams(window.location.search);
+	document.getElementById("table").getElementsByTagName('tbody')[0].innerHTML = '';
+	experiments_get(searchParams).then(data => {
 		for ( const row of data ) {
 			table.add_row(
 				'table',
@@ -20,6 +21,10 @@ function experimentsGet() {
 			);
 		}
 	})
+}
+
+function clearURLParams() {
+    history.replaceState({}, document.title, window.location.pathname);
 }
 
 window.onload = () => {
@@ -105,4 +110,20 @@ window.onload = () => {
 			experimentsGet()
 		})
 	}
+
+	const button = document.getElementById('find');
+    button.addEventListener('click', function(event) {
+    	event.preventDefault();
+    	clearURLParams();
+    	const url = new URL(window.location.href);
+    	let text = document.getElementById("search").value;
+    	let keyValuePairs = text.split(', ');
+		keyValuePairs.forEach(function(keyValue) {
+    	let pair = keyValue.split('=');
+    	let key = pair[0];
+    	let value = pair[1];
+    	url.searchParams.set(key, value);
+		});
+		window.location.href = String(url);
+    });
 };

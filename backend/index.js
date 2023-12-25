@@ -22,7 +22,7 @@ app.use(express.static(join(SRC_DIR, 'js')));
 
 app.get('/experiments', async (req, res)=>{
   const query = req.query;
-  const data = await db.experiments_get()
+  const data = await db.experiments_get(query)
   if (!data) {
     res.sendStatus(400);
   }
