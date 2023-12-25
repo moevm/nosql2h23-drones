@@ -1,5 +1,4 @@
 import * as table from './table.js';
-import { URL_MAP } from '../../server-settings.js';
 import { drone_info_get_notes, drone_note_post } from './db-restapi.js';
 
 async function fetchDroneInfo() {
@@ -68,7 +67,7 @@ window.onload = () => {
 	notesGet()
 
 	document.getElementById('back').onclick = () => {
-		window.location.href = URL_MAP.get('experiment') + `?id=${new URLSearchParams(window.location.search).get('experiment_id')}`;
+		window.location.href = `/experiment?id=${new URLSearchParams(window.location.search).get('experiment_id')}`;
 	}
 
 	const dialog_add = document.getElementById("dialog_add");

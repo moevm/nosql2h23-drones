@@ -1,5 +1,4 @@
 import * as table from './table.js';
-import { URL_MAP } from '../../server-settings.js';
 import { experiment_get_drones, drone_info_post } from './db-restapi.js';
 
 async function fetchExperimentDrones() {
@@ -24,7 +23,7 @@ function dronesGet() {
 					String(++i),
 					row.name
 				],
-				URL_MAP.get('drone-notes') + `?experiment_id=${new URLSearchParams(window.location.search).get('id')}&drone_info_id=${row._id}`
+				`/drone-notes?experiment_id=${new URLSearchParams(window.location.search).get('id')}&drone_info_id=${row._id}`
 			);
 		}
 	});
@@ -38,7 +37,7 @@ window.onload = () => {
 	dronesGet()
 
 	document.getElementById('back').onclick = () => {
-		window.location.href = URL_MAP.get('experiments');
+		window.location.href = `/experiments`;
 	}
 	document.getElementById('sort_up').onclick = () => {
 		const url = new URL(window.location.href)

@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
-import { PORT, HOST, DB_COLLECTIONS } from './server-settings.js';
+import { PORT, DB_COLLECTIONS } from './server-settings.js';
 import * as db from './src/js/db-rest-methods.js';
 import { ObjectId } from 'mongodb';
 import multer from 'multer';
@@ -258,6 +258,6 @@ process.on('SIGINT', ()=>{
   process.exit();
 })
 
-app.listen(PORT, HOST, () => {
+app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}!`);
 })

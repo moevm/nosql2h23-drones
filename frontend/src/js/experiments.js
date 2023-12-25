@@ -1,5 +1,4 @@
 import * as table from './table.js';
-import { URL_MAP } from '../../server-settings.js';
 import { experiments_get, experiment_post, export_data_get, import_data_post } from './db-restapi.js';
 
 function experimentsGet() {
@@ -17,7 +16,7 @@ function experimentsGet() {
 					row.dronesInfo?.length || 0,
 					String(row.timeAmount) + ' s'
 				],
-				URL_MAP.get('experiment') + `?id=${row._id}`
+				`/experiment?id=${row._id}`
 			);
 		}
 	})

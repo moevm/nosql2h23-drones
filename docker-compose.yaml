@@ -1,0 +1,35 @@
+services:
+  frontend:
+    build:
+      context: frontend
+      args:
+        PROJECT_DIR: ${PROJECT_DIR}
+        BACKEND_URL: http://127.0.0.1:${BACKEND_PORT}
+    depends_on:
+      - backend
+    environment:
+      - FRONTEND_PORT=${FRONTEND_PORT}
+    command: npm run start
+    ports:
+      - "127.0.0.1:${FRONTEND_PORT}:${FRONTEND_PORT}"
+  backend:
+    build:
+      context: backend
+      args:
+        PROJECT_DIR: ${PROJECT_DIR}
+    depends_on:
+      - mongodb
+    environment:
+      - BACKEND_PORT=${BACKEND_PORT}
+      - MONGODB_URI=mongodb://mongodb:${DB_PORT}
+    command: npm run start
+    ports:
+      - "127.0.0.1:${BACKEND_PORT}:${BACKEND_PORT}"
+  mongodb:
+    image: "mongo:7.0.4"
+    restart: always
+    volumes:
+      - database:/data/db
+
+volumes:
+  database:
