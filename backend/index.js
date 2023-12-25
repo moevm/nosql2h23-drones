@@ -147,9 +147,25 @@ app.post('/drone-info', async (req, res)=>{
 
 app.get('/drone-info/notes', async (req, res)=>{
   const query = req.query;
-  const new_query = {
-    _id: query.id
-  };
+  const new_query = Object.assign({_id: query.id,},
+    query.time === undefined ? null : {time: new Date(query.time)},
+    query.pos_x === undefined ? null : {pos_x: parseFloat(query.pos_x)},
+    query.pos_y === undefined ? null : {pos_y: parseFloat(query.pos_y)},
+    query.pos_z === undefined ? null : {pos_z: parseFloat(query.pos_z)},
+    query.vel_x === undefined ? null : {vel_x: parseFloat(query.vel_x)},
+    query.vel_y === undefined ? null : {vel_y: parseFloat(query.vel_y)},
+    query.vel_z === undefined ? null : {vel_z: parseFloat(query.vel_z)},
+    query.roll === undefined ? null : {roll: parseFloat(query.roll)},
+    query.pitch === undefined ? null : {pitch: parseFloat(query.pitch)},
+    query.yawl === undefined ? null : {yawl: parseFloat(query.yawl)},
+    query.ang_vel_x === undefined ? null : {ang_vel_x: parseFloat(query.ang_vel_x)},
+    query.ang_vel_y === undefined ? null : {ang_vel_y: parseFloat(query.ang_vel_y)},
+    query.ang_vel_z === undefined ? null : {ang_vel_z: parseFloat(query.ang_vel_z)},
+    query.rpm0 === undefined ? null : {rpm0: parseInt(query.rpm0, 10)},
+    query.rpm1 === undefined ? null : {rpm1: parseInt(query.rpm1, 10)},
+    query.rpm2 === undefined ? null : {rpm2: parseInt(query.rpm2, 10)},
+    query.rpm3 === undefined ? null : {rpm3: parseInt(query.rpm3, 10)},
+  );
   const data = await db.drone_info_get_notes(new_query);
   if (!data) {
     res.sendStatus(400);

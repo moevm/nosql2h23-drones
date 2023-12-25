@@ -6,6 +6,8 @@ async function fetchExperimentDrones() {
 	const query = {
 		id: new URLSearchParams(window.location.search).get('id'),
 		name: new URLSearchParams(window.location.search).get('name'),
+		sortBy: new URLSearchParams(window.location.search).get('sortBy'),
+		sortOrder: new URLSearchParams(window.location.search).get('sortOrder'),
 	}
 	return await experiment_get_drones(query);
 }
