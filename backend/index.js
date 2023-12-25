@@ -91,9 +91,9 @@ app.post('/experiment', async (req, res)=>{
 
 app.get('/experiment/drones', async (req, res)=>{
   const query = req.query;
-  const new_query = {
-    _id: query.id
-  };
+  const new_query = Object.assign({_id: query.id,},
+    query.name === undefined ? null : {name: query.name},
+  );
   const data = await db.experiment_get_drones(new_query);
   if (!data) {
     res.sendStatus(400);
