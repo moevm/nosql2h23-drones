@@ -76,13 +76,13 @@ window.onload = () => {
 
     document.getElementById('sort_up_number').onclick = () => {
 		const url = new URL(window.location.href)
-		url.searchParams.set('sortBy', 'drones_amount')
+		url.searchParams.set('sortBy', 'dronesAmount')
 		url.searchParams.set('sortOrder', 'asc')
 		window.location.href = String(url)
 	}
 	document.getElementById('sort_down_number').onclick = () => {
 		const url = new URL(window.location.href)
-		url.searchParams.set('sortBy', 'drones_amount')
+		url.searchParams.set('sortBy', 'dronesAmount')
 		url.searchParams.set('sortOrder', 'desc')
 		window.location.href = String(url)
 	}
