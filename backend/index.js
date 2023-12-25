@@ -22,11 +22,34 @@ app.use(express.static(join(SRC_DIR, 'js')));
 
 app.get('/experiments', async (req, res)=>{
   const query = req.query;
-  const data = await db.experiments_get(query)
+  const new_query = {
+    
+  };
+  const data = await db.experiments_get(new_query)
   if (!data) {
     res.sendStatus(400);
   }
   else {
+    if(query.sortBy && query.sortOrder){
+      if (query.sortBy == 'drones_amount') {
+        const order = query.sortOrder == 'asc' ? 1 : -1
+        data.sort((a, b) => {
+          return order * (a.dronesInfo.length - b.dronesInfo.length)
+        })
+      }
+      else {
+        const order = query.sortOrder == 'asc' ? 1 : -1
+        data.sort((a, b) => {
+          if (a[query.sortBy] > b[query.sortBy]){
+            return order
+          } 
+          else if (a[query.sortBy] < b[query.sortBy]){
+            return -order
+          }
+          return 0
+        })
+      }
+    }
     res.json(data);
   }
 });
