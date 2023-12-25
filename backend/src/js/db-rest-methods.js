@@ -291,3 +291,49 @@ export async function drone_note_post(data) {
         console.log(error)
     }
 }
+
+export async function export_data() {
+    const data = {};
+    const database = client.db(DB_NAME);
+    data['Experiments'] = await database.collection('Experiments').find().toArray();
+    data['DronesInfo']  = await database.collection('DronesInfo').find().toArray();
+    data['DronesNote']  = await database.collection('DronesNote').find().toArray();
+    return data;
+}
+
+export async function import_data(data)
+{
+    const database = client.db(DB_NAME);
+
+    const experiments = data['Experiments'] || [];
+    const dronesInfo  = data['DronesInfo']  || [];
+    const dronesNote  = data['DronesNote']  || [];
+
+    for (const experiment of experiments) {
+        experiment['_id'] = new ObjectId(experiment['_id']);
+        experiment['creationDate'] = new Date(experiment['creationDate']);
+        experiment['changedDate']  = new Date(experiment['changedDate']);
+        experiment['dronesInfo']   = experiment['dronesInfo'].map(drone => new ObjectId(drone));
+    }
+    for (const droneInfo of dronesInfo) {
+        droneInfo['_id'] = new ObjectId(droneInfo['_id']);
+        droneInfo['notes'] = droneInfo['notes'].map(note => new ObjectId(note));
+    }
+    for (const droneNote of dronesNote) {
+        droneNote['_id'] = new ObjectId(droneNote['_id']);
+        droneNote['droneID'] = new ObjectId(droneNote['droneID']);
+        droneNote['time'] = new Date(droneNote['time']);
+    }
+
+    try {
+        await database.collection('Experiments').insertMany(experiments, {ordered: true});
+        await database.collection('DronesInfo').insertMany(dronesInfo, {ordered: true});
+        await database.collection('DronesNote').insertMany(dronesNote, {ordered: true});
+    }
+    catch (e) {
+        console.error(e)
+        return false;
+    }
+    
+    return true;
+}

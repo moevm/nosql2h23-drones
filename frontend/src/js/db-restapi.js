@@ -183,3 +183,31 @@ export async function drone_note_post(data) {
 	    body: JSON.stringify(data)
 	});
 }
+
+export async function export_data_get() {
+	fetch(`${BACKEND_URL}/massive-export`)
+		.then(res => res.blob())
+		.then(res => {
+			const aElement = document.createElement("a");
+			aElement.setAttribute("download", "massive-export.json");
+			const href = URL.createObjectURL(res);
+			aElement.href = href;
+			aElement.setAttribute("target", "_blank");
+			aElement.click();
+			URL.revokeObjectURL(href);
+		})
+		.catch(e => console.error(e));
+}
+
+export async function import_data_post( file ) {
+	const formData = new FormData();
+    formData.append('data', file);
+	await fetch(`${BACKEND_URL}/massive-import`, {
+	    method: 'POST',
+	    headers: {
+			// 'Content-Type': `multipart/form-data;`
+	    },
+	    body: formData
+	});
+	window.location.reload();
+}

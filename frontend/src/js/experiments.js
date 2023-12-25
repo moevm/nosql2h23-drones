@@ -1,6 +1,6 @@
 import * as table from './table.js';
 import { URL_MAP } from '../../server-settings.js';
-import { experiments_get, experiment_post } from './db-restapi.js';
+import { experiments_get, experiment_post, export_data_get, import_data_post } from './db-restapi.js';
 
 function experimentsGet() {
 	const searchParams = new URLSearchParams(window.location.search);
@@ -27,6 +27,14 @@ function clearURLParams() {
     history.replaceState({}, document.title, window.location.pathname);
 }
 
+function import_data(event) {
+	import_data_post(event.target.files[0]);
+}
+
+function export_data() {
+	export_data_get();
+}
+
 window.onload = () => {
 	experimentsGet()
 
@@ -34,6 +42,12 @@ window.onload = () => {
 	document.getElementById('add').onclick = () => {
 		dialog_add.showModal();
 	}
+
+	document.getElementById('import').onclick = () => {
+		document.getElementById('file-import').click();
+	}
+	document.getElementById('export').onclick = export_data_get;
+	document.getElementById('file-import').onchange = import_data;
 
 	document.getElementById('sort_up_name').onclick = () => {
 		const url = new URL(window.location.href)
