@@ -1,4 +1,4 @@
-import { BACKEND_URL } from '../../server-settings.js';
+import { BACKEND_URL } from '../../dynamic_settings.js';
 
 export async function experiments_get(query) {
 	let url = `${BACKEND_URL}/experiments`;
