@@ -67,7 +67,6 @@ export async function experiment_post(data) {
 
 export async function experiment_get_drones(query){
     try {
-        console.log(query)
         if (!query)
             return []
         const database = client.db(DB_NAME);
@@ -161,8 +160,65 @@ export async function drone_info_get_notes(query){
         if (!data.notes)
             return []
         for ( const noteId of data.notes ) {
-            const newData = await drone_note_get( { _id: noteId } );
-            notes = notes.concat( newData );
+            const new_query = {
+                _id: noteId
+            }
+            if (query.time != undefined) {
+                new_query.time = query.time
+            }
+            if (query.pos_x != undefined) {
+                new_query.pos_x = query.pos_x
+            }
+            if (query.pos_y != undefined) {
+                new_query.pos_y = query.pos_y
+            }
+            if (query.pos_z != undefined) {
+                new_query.pos_z = query.pos_z
+            }
+            if (query.vel_x != undefined) {
+                new_query.vel_x = query.vel_x
+            }
+            if (query.vel_y != undefined) {
+                new_query.vel_y = query.vel_y
+            }
+            if (query.vel_z != undefined) {
+                new_query.vel_z = query.vel_z
+            }
+            if (query.roll != undefined) {
+                new_query.roll = query.roll
+            }
+            if (query.pitch != undefined) {
+                new_query.pitch = query.pitch
+            }
+            if (query.yawl != undefined) {
+                new_query.yawl = query.yawl
+            }
+            if (query.ang_vel_x != undefined) {
+                new_query.ang_vel_x = query.ang_vel_x
+            }
+            if (query.ang_vel_y != undefined) {
+                new_query.ang_vel_y = query.ang_vel_y
+            }
+            if (query.ang_vel_z != undefined) {
+                new_query.ang_vel_z = query.ang_vel_z
+            }
+            if (query.rpm0 != undefined) {
+                new_query.rpm0 = query.rpm0
+            }
+            if (query.rpm1 != undefined) {
+                new_query.rpm1 = query.rpm1
+            }
+            if (query.rpm2 != undefined) {
+                new_query.rpm2 = query.rpm2
+            }
+            if (query.rpm3 != undefined) {
+                new_query.rpm3 = query.rpm3
+            }
+            const newData = await drone_note_get( new_query );
+
+            if (Object.keys(newData).length !== 0) {
+                notes = notes.concat( newData );
+            }
         }
         return notes;
     }

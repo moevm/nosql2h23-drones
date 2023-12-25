@@ -3,10 +3,29 @@ import { URL_MAP } from '../../server-settings.js';
 import { drone_info_get_notes, drone_note_post } from './db-restapi.js';
 
 async function fetchDroneInfo() {
-	const id = new URLSearchParams(window.location.search).get('drone_info_id');
-	const sortBy = new URLSearchParams(window.location.search).get('sortBy');
-	const sortOrder = new URLSearchParams(window.location.search).get('sortOrder');
-	return await drone_info_get_notes(id, sortBy, sortOrder);
+	const query = {
+		id: new URLSearchParams(window.location.search).get('drone_info_id'),
+		time: new URLSearchParams(window.location.search).get('time'),
+		pos_x: new URLSearchParams(window.location.search).get('pos_x'),
+		pos_y: new URLSearchParams(window.location.search).get('pos_y'),
+		pos_z: new URLSearchParams(window.location.search).get('pos_z'),
+		vel_x: new URLSearchParams(window.location.search).get('vel_x'),
+		vel_y: new URLSearchParams(window.location.search).get('vel_y'),
+		vel_z: new URLSearchParams(window.location.search).get('vel_z'),
+		roll: new URLSearchParams(window.location.search).get('roll'),
+		pitch: new URLSearchParams(window.location.search).get('pitch'),
+		yawl: new URLSearchParams(window.location.search).get('yawl'),
+		ang_vel_x: new URLSearchParams(window.location.search).get('ang_vel_x'),
+		ang_vel_y: new URLSearchParams(window.location.search).get('ang_vel_y'),
+		ang_vel_z: new URLSearchParams(window.location.search).get('ang_vel_z'),
+		rpm0: new URLSearchParams(window.location.search).get('rpm0'),
+		rpm1: new URLSearchParams(window.location.search).get('rpm1'),
+		rpm2: new URLSearchParams(window.location.search).get('rpm2'),
+		rpm3: new URLSearchParams(window.location.search).get('rpm3'),
+		sortBy: new URLSearchParams(window.location.search).get('sortBy'),
+		sortOrder: new URLSearchParams(window.location.search).get('sortOrder'),
+	}
+	return await drone_info_get_notes(query);
 }
 
 function notesGet() {
@@ -39,6 +58,10 @@ function notesGet() {
 			);
 		}
 	});
+}
+
+function clearURLParams() {
+    history.replaceState({}, document.title, window.location.pathname);
 }
 
 window.onload = () => {
@@ -308,15 +331,21 @@ window.onload = () => {
 	const button = document.getElementById('find');
     button.addEventListener('click', function(event) {
     	event.preventDefault();
+    	let url = new URL(window.location.href);
+    	let experiment_id = url.searchParams.get('experiment_id');
+    	let drone_info_id = url.searchParams.get('drone_info_id');
+    	clearURLParams();
+    	url = new URL(window.location.href);
+    	url.searchParams.set('experiment_id', experiment_id);
+    	url.searchParams.set('drone_info_id', drone_info_id);
     	let text = document.getElementById("search").value;
     	let keyValuePairs = text.split(', ');
-		let resultObject = {};
 		keyValuePairs.forEach(function(keyValue) {
-    	let pair = keyValue.split('=');
-    	let key = pair[0];
-    	let value = pair[1];
-    	resultObject[key] = value;
+	    	let pair = keyValue.split('=');
+	    	let key = pair[0];
+	    	let value = pair[1];
+	    	url.searchParams.set(key, value);
 		});
-		console.log(resultObject);
+		window.location.href = String(url);
     });
 }
