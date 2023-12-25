@@ -22,16 +22,20 @@ app.use(express.static(join(SRC_DIR, 'js')));
 
 app.get('/experiments', async (req, res)=>{
   const query = req.query;
-  const new_query = {
-    
-  };
+  const new_query = Object.assign({},
+    query.name === undefined ? null : {name: query.name},
+    query.creationDate === undefined ? null : {creationDate: new Date(query.creationDate)},
+    query.changedDate === undefined ? null : {changedDate: new Date(query.changedDate)},
+    query.dronesAmount === undefined ? null : {dronesInfo: { $size: parseInt(query.dronesAmount, 10)}},
+    query.timeAmount === undefined ? null : {timeAmount: parseFloat(query.timeAmount)},
+  );
   const data = await db.experiments_get(new_query)
   if (!data) {
     res.sendStatus(400);
   }
   else {
     if(query.sortBy && query.sortOrder){
-      if (query.sortBy == 'drones_amount') {
+      if (query.sortBy == 'dronesAmount') {
         const order = query.sortOrder == 'asc' ? 1 : -1
         data.sort((a, b) => {
           return order * (a.dronesInfo.length - b.dronesInfo.length)
