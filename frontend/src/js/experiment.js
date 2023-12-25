@@ -3,10 +3,11 @@ import { URL_MAP } from '../../server-settings.js';
 import { experiment_get_drones, drone_info_post } from './db-restapi.js';
 
 async function fetchExperimentDrones() {
-	const id = new URLSearchParams(window.location.search).get('id');
-	const sortBy = new URLSearchParams(window.location.search).get('sortBy');
-	const sortOrder = new URLSearchParams(window.location.search).get('sortOrder');
-	return await experiment_get_drones(id, sortBy, sortOrder);
+	const query = {
+		id: new URLSearchParams(window.location.search).get('id'),
+		name: new URLSearchParams(window.location.search).get('name'),
+	}
+	return await experiment_get_drones(query);
 }
 
 function dronesGet() {
@@ -25,6 +26,10 @@ function dronesGet() {
 			);
 		}
 	});
+}
+
+function clearURLParams() {
+    history.replaceState({}, document.title, window.location.pathname);
 }
 
 window.onload = () => {
@@ -68,15 +73,19 @@ window.onload = () => {
 	const button = document.getElementById('find');
     button.addEventListener('click', function(event) {
     	event.preventDefault();
+    	let url = new URL(window.location.href);
+    	let id = url.searchParams.get('id');
+    	clearURLParams();
+    	url = new URL(window.location.href);
+    	url.searchParams.set('id', id);
     	let text = document.getElementById("search").value;
     	let keyValuePairs = text.split(', ');
-		let resultObject = {};
 		keyValuePairs.forEach(function(keyValue) {
-    	let pair = keyValue.split('=');
-    	let key = pair[0];
-    	let value = pair[1];
-    	resultObject[key] = value;
+	    	let pair = keyValue.split('=');
+	    	let key = pair[0];
+	    	let value = pair[1];
+	    	url.searchParams.set(key, value);
 		});
-		console.log(resultObject);
+		window.location.href = String(url);
     });
 }

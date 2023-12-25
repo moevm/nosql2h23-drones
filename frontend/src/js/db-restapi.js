@@ -40,10 +40,13 @@ export async function experiment_post(data) {
 	});
 }
 
-export async function experiment_get_drones(id, sortBy, sortOrder) {
-	let url = `${BACKEND_URL}/experiment/drones?id=${String(id)}`
-	if(sortBy && sortOrder){
-		url += `&sortBy=${String(sortBy)}&sortOrder=${String(sortOrder)}`
+export async function experiment_get_drones(query) {
+	let url = `${BACKEND_URL}/experiment/drones?id=${String(query.id)}`
+	if(query.sortBy && query.sortOrder){
+		url += `&sortBy=${String(query.sortBy)}&sortOrder=${String(query.sortOrder)}`
+	}
+	if(query.name){
+		url += `&name=${String(query.name)}`
 	}
 	const res = await fetch(url);
 	if (res.ok) {

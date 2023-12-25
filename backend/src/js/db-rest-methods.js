@@ -67,6 +67,7 @@ export async function experiment_post(data) {
 
 export async function experiment_get_drones(query){
     try {
+        console.log(query)
         if (!query)
             return []
         const database = client.db(DB_NAME);
@@ -79,8 +80,16 @@ export async function experiment_get_drones(query){
         if (!data.dronesInfo)
             return []
         for ( const droneId of data.dronesInfo ) {
-            const newData = await drone_info_get( { _id: droneId } );
-            drones = drones.concat( newData );
+            const new_query = {
+                _id: droneId
+            }
+            if (query.name != undefined) {
+                new_query.name = query.name
+            }
+            const newData = await drone_info_get(new_query);
+            if (Object.keys(newData).length !== 0) {
+                drones = drones.concat( newData );
+            }
         }
         return drones;
     }
